@@ -4,8 +4,7 @@
 </p>
 
 ## Overview
-This is a project to rank clients interested in purchasing vehicle insurance. The company SafeHarbor Insurance is a fictitious insurance company made up by us, 
-in order to provide a business context for our problem. The data have been acquired in the challenge [Health Insurance Cross Sell Prediction](https://www.kaggle.com/datasets/anmolkumar/health-insurance-cross-sell-prediction) from Kaggle, We perform exploratory data analysis, train different classification Machine Learning models, evaluate the metrics, and test their results.
+This is a Learning to Rank (LTR) project in which the objective is to classify and rank clients interested in purchasing vehicle insurance. The company SafeHarbor Insurance is a fictitious insurance company made up by us, in order to provide a business context for our problem. The data have been acquired in the challenge [Health Insurance Cross Sell Prediction](https://www.kaggle.com/datasets/anmolkumar/health-insurance-cross-sell-prediction) from Kaggle, We perform a exploratory data analysis, train different classification Machine Learning models, evaluate the metrics, and test their results.
 #### This project was made by Pablo Miranda
 
 # 1. Business Problem
@@ -19,10 +18,9 @@ The product team needs to know how viable is to sell this vehicle insurance for 
 - How many phone calls does it take for the sales team to contact 80% of the customers interested in purchasing vehicle insurance?
 # 2. Business Assumptions
 ## 2.1. General 
-The context in Kaggle brings up values in Rupees, a common term for the currency of different Southeast Asian countries. Assuming we are talking about Indian Rupees, we can perform a direct conversion of these values to American Dollars, however the value resulting from this conversion may not represent the reality of business other than Indian. This will not affect the data exploration or the construction of the Machine Learning models.
-## 2.2. Technical
-We are assuming that the sales team has knowledge in handling the functionalities of Google Sheets.
-## 2.3. Variables
+The context in Kaggle brings up values in Rupees, a common term for the currency of different Southeast Asian countries. Assuming we are talking about Indian Rupees, we can perform a direct conversion of these values to American Dollars, however the value resulting from this conversion may not represent the reality of business other than Indian. This, of course, will not affect the data exploration or the construction of the Machine Learning models.
+We are also assuming that the sales team has knowledge in handling the functionalities of Google Sheets.
+## 2.2. Variables
 - id: Unique ID for the customer.
 - Gender: Gender of the customer.
 - Age: Age of the customer.
@@ -46,7 +44,6 @@ A Google Sheets file, sorting all customers by their propensity to buy the new p
 - Jupyter Notebook;
 - PostgreSQL;
 - Git and Github;
-- Coggle Mindmaps;
 - Render Cloud;
 - Regression and Classification logarithms;
 - Scikit-learn ML library;
@@ -57,13 +54,24 @@ A Google Sheets file, sorting all customers by their propensity to buy the new p
 My strategy to solve this challenge was:
 
 **Step 01. Data Description:**
-
+Here we will do the first exploration on the data. It would be the moment to split the data between test, train and validation sets, but there is no need to do so, because Kaggle is already available to us with the split done.
+- Examine the dataset variables;
+- Rename the columns to lower case;
+- Check the data types; 
+- Check for missing data (and what strategies should be adopted to deal with the absence of such data);
+- Descriptive statistics exploration.
 **Step 02. Feature Engineering:**
-
+This is the time to inquire not only about the relationships between the features, but also to create new features that may better serve the training of our ML models.
+- Questioning the relationship of the features with the help of a mindmap;
+- Developing of new features.
 **Step 03. Data Filtering:**
-
+For this project there was no need to perform data filtering.
 **Step 04. Exploratory Data Analysis:**
-
+In this step univariate, bivariate and multivariate analyses of the dataset features were performed in order to generate business insights and validate the hypotheses previously raised. The insights generated here will help to select which features may be relevant for the ML models.
+- Univariate analysis of each feature;
+- Bivariate analysis with the purpose of validating our hypotheses;
+- Multivariate analysis with the help of a heatmap;
+- Evaluation of the hypothesis validations.
 **Step 05. Data Preparation:**
 
 **Step 06. Feature Selection:**
@@ -76,7 +84,7 @@ My strategy to solve this challenge was:
 
 **Step 10. Deploy Model to Production:**
 
-# 4. Top 3 Data Insights
+# 5. Top 3 Data Insights
 
 **Hypothesis 01:**
 
@@ -90,14 +98,14 @@ My strategy to solve this challenge was:
 
 **True/False.**
 
-# 5. Machine Learning Model Applied
+# 6. Machine Learning Model Applied
 
-# 6. Machine Learning Model Performance
+# 7. Machine Learning Model Performance
 
-# 7. Business Results
+# 8. Business Results
 
-# 8. Conclusions
+# 9. Conclusions
 
-# 9. Lessons Learned
+# 10. Lessons Learned
 
-# 10. Next Steps to Improve
+# 11. Next Steps to Improve
