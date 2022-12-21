@@ -33,6 +33,7 @@ We are also assuming that the sales team has knowledge in handling the functiona
 - PolicySalesChannel: Anonymized Code for the channel of outreaching to the customer ie. Different Agents, Over Mail, Over Phone, In Person, etc.
 - Vintage: Number of Days, Customer has been associated with the company.
 - Response: 1 = Customer is interested, 0 = Customer is not interested.
+
 For the description of these variables, we consulted the link below:
 https://www.kaggle.com/datasets/anmolkumar/health-insurance-cross-sell-prediction
 # 3. Solution Planning
@@ -54,24 +55,32 @@ A Google Sheets file, sorting all customers by their propensity to buy the new p
 My strategy to solve this challenge was:
 
 **Step 01. Data Description:**
+
 Here we will do the first exploration on the data. It would be the moment to split the data between test, train and validation sets, but there is no need to do so, because Kaggle is already available to us with the split done.
 - Examine the dataset variables;
 - Rename the columns to lower case;
 - Check the data types; 
 - Check for missing data (and what strategies should be adopted to deal with the absence of such data);
 - Descriptive statistics exploration.
+
 **Step 02. Feature Engineering:**
+
 This is the time to inquire not only about the relationships between the features, but also to create new features that may better serve the training of our ML models.
 - Questioning the relationship of the features with the help of a mindmap;
 - Developing of new features.
+
 **Step 03. Data Filtering:**
+
 For this project there was no need to perform data filtering.
+
 **Step 04. Exploratory Data Analysis:**
+
 In this step univariate, bivariate and multivariate analyses of the dataset features were performed in order to generate business insights and validate the hypotheses previously raised. The insights generated here will help to select which features may be relevant for the ML models.
 - Univariate analysis of each feature;
 - Bivariate analysis with the purpose of validating our hypotheses;
 - Multivariate analysis with the help of a heatmap;
 - Evaluation of the hypothesis validations.
+
 **Step 05. Data Preparation:**
 
 **Step 06. Feature Selection:**
