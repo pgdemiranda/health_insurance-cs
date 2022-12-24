@@ -83,7 +83,16 @@ In this step univariate, bivariate and multivariate analyses of the dataset feat
 
 **Step 05. Data Preparation:**
 
+In this step we use the scikit-learn library for data preprocessing work.
+- Standardization was simple, and the StandardScaler() was applied to 'annual_premium' feature;
+- Rescaling was done applying MinMaxScaler to 'age' and 'vintage' features, because we didn't have outliers;
+- Encoding was done in different ways: one hot enconding to 'vehicle_age' feature, target encoding to 'gender' and 'region_code', and finally, frequency encoding was applied to 'policy_sales_channel'.
+
 **Step 06. Feature Selection:**
+
+The selection of the features was performed with the help of the Boruta algorithm.
+- Selection with Boruta algorithm was performed with the help of the ExtraTreesClassifier model.
+- Feature Importance was also considered using the feature_importances_ attribute from ExtraTreesClassifer. Then we plot a graph with the result of the ranking and select the following features: 'annual_premium', 'vintage', 'age', 'region_code', 'vehicle_damage', 'previously_insured' and 'policy_sales_channel'.
 
 **Step 07. Machine Learning Modelling:**
 
