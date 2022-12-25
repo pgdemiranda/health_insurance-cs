@@ -91,16 +91,19 @@ In this step we use the scikit-learn library for data preprocessing work.
 **Step 06. Feature Selection:**
 
 The selection of the features was performed with the help of the Boruta algorithm.
-- Selection with Boruta algorithm was performed with the help of the ExtraTreesClassifier model.
-- Feature Importance was also considered using the feature_importances_ attribute from ExtraTreesClassifer. Then we plot a graph with the result of the ranking and select the following features: 'annual_premium', 'vintage', 'age', 'region_code', 'vehicle_damage', 'previously_insured' and 'policy_sales_channel'.
+- Selection with Boruta algorithm was performed with the help of the ExtraTreesClassifier model;
+- Feature Importance was also considered using the feature_importances_ attribute from ExtraTreesClassifer. Then, a graph was ploted, displaying which features was ranking best, making easy for the feature selection.
 
 **Step 07. Machine Learning Modelling:**
+
+
 
 **Step 08. Hyperparameter Fine Tunning:**
 
 **Step 09. Convert Model Performance to Business Values:**
 
 **Step 10. Deploy Model to Production:**
+
 
 # 5. Top 3 Data Insights
 
