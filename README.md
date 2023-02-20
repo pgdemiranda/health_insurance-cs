@@ -96,8 +96,6 @@ The selection of the features was performed with the help of the Boruta algorith
 
 **Step 07. Machine Learning Modelling:**
 
-
-
 **Step 08. Hyperparameter Fine Tunning:**
 
 **Step 09. Convert Model Performance to Business Values:**
