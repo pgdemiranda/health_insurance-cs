@@ -2,7 +2,7 @@ import os
 import pickle
 import pandas as pd
 from flask import Flask, request, Response
-from notebooks.healthinsurance.HealthInsurance import HealthInsurance
+from healthinsurance.HealthInsurance import HealthInsurance
 
 # loading model
 model = pickle.load(open('src/models/model_linear_regression.pkl', 'rb'))
@@ -42,5 +42,5 @@ def health_insurance_predict():
         return Response('{}', status=200, mimetype='application/json')
 
 if __name__ == '__main__':
-    port = os.environ.get('PORT', 5000)
+    # port = os.environ.get('PORT', 5000)
     app.run(host='0.0.0.0', port=port)
