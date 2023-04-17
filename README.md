@@ -1,4 +1,4 @@
-# Health Insurance Cross-Validation
+# Health Insurance Cross Sell
 <p align="center">
   <img src="./reports/figures/1.png" />
 </p>
