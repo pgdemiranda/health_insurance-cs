@@ -10,7 +10,7 @@ model = pickle.load(open('src/models/model_linear_regression.pkl', 'rb'))
 # initialize API
 app = Flask(__name__)
 
-@app.route('/notebooks/healthinsurance/predict', methods = ['POST'])
+@app.route('/healthinsurance/predict', methods = ['POST'])
 def health_insurance_predict():
     test_json = request.get_json()
     
