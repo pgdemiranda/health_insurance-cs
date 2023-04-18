@@ -53,72 +53,122 @@ My strategy to solve this challenge was:
 
 **Step 01. Data Description:**
 
-Here we will do the first exploration on the data. It would be the moment to split the data between test, train and validation sets, but there is no need to do so, because Kaggle is already available to us with the split done.
+Here we performed the first exploration of the data. Although we will not need to split the data between test, train, and validation sets, as Kaggle has already done this for us, we will still need to perform the following tasks:
 - Examine the dataset variables;
 - Rename the columns to lower case;
-- Check the data types; 
-- Check for missing data (and what strategies should be adopted to deal with the absence of such data);
-- Descriptive statistics exploration.
+- Check the data types;
+- Check for missing data (and determine the best strategy to deal with missing data);
+- Explore descriptive statistics.
 
 **Step 02. Feature Engineering:**
 
-This is the time to inquire not only about the relationships between the features, but also to create new features that may better serve the training of our ML models.
-- Questioning the relationship of the features with the help of a mindmap;
-- Developing of new features.
+This step involves not only exploring the relationships between features, but also creating new features that may better serve the training of our ML models. We will perform the following tasks:
+- Create a mindmap to question the relationships between the features;
+- Develop new features.
 
 **Step 03. Data Filtering:**
 
-For this project there was no need to perform data filtering.
+No data filtering was necessary for this project.
 
 **Step 04. Exploratory Data Analysis:**
 
-In this step univariate, bivariate and multivariate analyses of the dataset features were performed in order to generate business insights and validate the hypotheses previously raised. The insights generated here will help to select which features may be relevant for the ML models.
-- Univariate analysis of each feature;
-- Bivariate analysis with the purpose of validating our hypotheses;
-- Multivariate analysis with the help of a heatmap;
-- Evaluation of the hypothesis validations.
+In this step, we will perform univariate, bivariate, and multivariate analyses of the dataset features to generate business insights and validate previously raised hypotheses. The insights generated here will help us select which features may be relevant for the ML models. We will perform the following tasks:
+- Perform univariate analysis of each feature;
+- Perform bivariate analysis to validate hypotheses;
+- Perform multivariate analysis with the help of a heatmap;
+- Evaluate hypothesis validations.
 
 **Step 05. Data Preparation:**
 
-In this step we use the scikit-learn library for data preprocessing work.
-- Standardization was simple, and the StandardScaler() was applied to 'annual_premium' feature;
-- Rescaling was done applying MinMaxScaler to 'age' and 'vintage' features, because we didn't have outliers;
-- Encoding was done in different ways: one hot enconding to 'vehicle_age' feature, target encoding to 'gender' and 'region_code', and finally, frequency encoding was applied to 'policy_sales_channel'.
+Here, the scikit-learn library was used for data preprocessing.
+- Standardize the 'annual_premium' feature using the StandardScaler() method;
+- Rescale the 'age' and 'vintage' features using MinMaxScaler() since there are no outliers;
+- Encode the features using the following methods: one-hot encoding for 'vehicle_age', target encoding for 'gender' and 'region_code', and frequency encoding for 'policy_sales_channel'.
 
 **Step 06. Feature Selection:**
 
-The selection of the features was performed with the help of the Boruta algorithm.
-- Selection with Boruta algorithm was performed with the help of the ExtraTreesClassifier model;
-- Feature Importance was also considered using the feature_importances_ attribute from ExtraTreesClassifer. Then, a graph was ploted, displaying which features was ranking best, making easy for the feature selection.
+We will use the Boruta algorithm to select features. We will perform the following tasks:
+- Use the ExtraTreesClassifier model with the Boruta algorithm to select features;
+- Consider feature importance using the 'feature_importances_' attribute from ExtraTreesClassifier. Then, plot a graph to display the best ranking features to facilitate feature selection.
 
 **Step 07. Machine Learning Modelling:**
 
+Three classification models (KNeighborsClassifier, LogisticRegression, and RandomForestClassifier) were trained, generating probability predictions, calculating propensity scores, and sorting customers by score. Then, precision and recall values were calculated for the top 50 customers for each model.
+- Using the 'cgc_lc' function, cumulative gain and lift curves were plotted for a set of provided models, allowing for a visual comparison of results;
+- The 'cross_validation' function was used to perform cross-validation for the provided models and return the means and standard deviations of precision and recall for each model;
+- The 'precision_at_k' and 'recall_at_k' functions were used to calculate precision and recall for the top k customers classified by the model.
+
 **Step 08. Hyperparameter Fine Tunning:**
 
+We performed a randomized search with cross-validation to optimize the hyperparameters of a logistic regression model and maximize the f1-score. Then, we will train the model on a dataset and evaluate it on a validation set.
+- The tuned model was then applied to a test set to predict outcomes;
+- Precision and recall were calculated at the top 50 clients for the model;
+- The performance of the tuned model was compared to the performance of the original logistic regression model using cross-validation;
+- Two models were plotted on the accumulative gain and lift curves to compare their performance.
+
 **Step 09. Convert Model Performance to Business Values:**
+We answered the 4 questions proposed in the challenge according to the final model. The details of the answers are further down, in the Business Results section.
 
 **Step 10. Deploy Model to Production:**
-
+The deployment was done on Render cloud. We prepared a Python script that started and executed the entire pipeline, which along with the entire repository, was uploaded to GitHub. Render made contact between the online repository and a Google Sheets spreadsheet with the score for each of the customers. In turn, in Google Sheets, a script was created that automated the reception of information and the score provided by the model.
+- The repository was committed to GitHub;
+- A Python script within the repository on GitHub is triggered by Render Cloud;
+- A script within Google Sheets receives information from Render Cloud and automates the customer scores.
 
 # 5. Top 3 Data Insights
 
-**Hypothesis 01:**
+**Hypothesis 01:** younger customers are more likely to be interested in purchasing vehicle insurance than older customers.
 
-**True/False.**
+**False**: most of the clients interested in purchasing insurance are around 35 to 50 years old.
 
-**Hypothesis 02:**
+<p align="right">
+  <img src="./reports/figures/H1.png" />
+</p>
 
-**True/False.**
+**Hypothesis 02:** customers who have previously purchased SafeHarbor health insurance are more likely to be interested in purchasing vehicle insurance than those who have not.
 
-**Hypothesis 03:**
+**False**: customers which doesn't purchased SafeHarbor health insurance previously are the more inclined to buy vehicle insurance.
 
-**True/False.**
+<p align="right">
+  <img src="./reports/figures/H2.png" />
+</p>
+
+**Hypothesis 03:** men are more likely to purchase insurance than women.
+
+**True**: Men are more willing to purchase vehicle insurance with a difference of 22.14% compared to women.
+
+<p align="right">
+  <img src="./reports/figures/H5.png" />
+</p>
 
 # 6. Machine Learning Model Applied
+The model applied to this challenge was Logistic Regression. Using Logistic Regression in Learning to Rank has several advantages, such as simplicity, interpretability, and fast training speed. It can handle a large number of features, including categorical ones, and can perform well in cases where the relationships between features and rankings are linear. These advantages were particularly relevant when deploying our model to the cloud, where availability was prioritized over achieving the best possible metric.
 
 # 7. Machine Learning Model Performance
 
+| Model_Name         | Precision@K Mean  | Precision@K STD   | Recall@K Mean | Recall@K STD |
+| ----------------- | ----------------- | ----------------- | ------------- | ------------ |
+| LogisticRegression | 0.273200          | 0.001100          | 0.734700      | 0.003000     |
+| LogisticRegression | 0.271000          | 0.002400          | 0.728800      | 0.006400     |
+
+
 # 8. Business Results
+These are our initial questions together with the answers from our model:
+1. Which variables are more relevant to an understanding of the conditions under which customers are interested in purchasing vehicle insurance?
+- vintage; 
+- annual_premium;
+- age;
+- vehicle_damage;
+- previously_insured.
+
+2. What percentage of customers interested in purchasing vehicle insurance can the sales team reach by making 20,000 phone calls?
+- With 20.000 calls sales team will be contact **58% of customers interested**.
+
+3. If the sales team's limit of phone calls is increased to 40,000, what percentage of customers interested in purchasing vehicle insurance will be contacted by the sales team?
+- With 40.000 calls sales team will be contact **99% of customers interested**.
+
+4. How many phone calls does it take for the sales team to contact 80% of the customers interested in purchasing vehicle insurance?
+- With 28.400 calls sales team will be contact **80% of customers interested**.
 
 # 9. Conclusions
 
