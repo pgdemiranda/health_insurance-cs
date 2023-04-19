@@ -13,19 +13,27 @@ class HealthInsurance():
         self.fe_policy_sales_channel_scaler = pickle.load(open(self.home_path + 'src/features/fe_policy_sales_channel_scaler.pkl', 'rb'))
 
     def data_cleaning(self, df1):
-        # Change data type
-        df1 = df1.rename(columns = str.lower)
-        df1['region_code'] = df1['region_code'].astype(str)
-        df1['policy_sales_channel'] = df1['policy_sales_channel'].astype(str)
+        # 1.1. Rename Columns
+        cols_new = ['id', 'gender', 'age', 'driving_license', 'region_code', 'previously_insured', 'vehicle_age', 
+                    'vehicle_damage', 'annual_premium', 'policy_sales_channel', 'vintage', 'response']
+
+        # rename 
+        df1.columns = cols_new
+        
         return df1 
 
+
     def feature_engineering(self, df2):
+        # 2.0. Feature Engineering
+
         # Vehicle Damage Number
-        df2['vehicle_damage'] = df2['vehicle_damage'].apply(lambda x: 1 if x == 'Yes' else 0)
+        df2['vehicle_damage'] = df2['vehicle_damage'].apply( lambda x: 1 if x == 'Yes' else 0 )
+
         # Vehicle Age
-        df2['vehicle_age'] = df2['vehicle_age'].apply(lambda x: 'over_2_years' if x == '> 2 Years' else 'between_1_2_year' if x == '1-2 Year' else 'below_1_year')
+        df2['vehicle_age'] =  df2['vehicle_age'].apply( lambda x: 'over_2_years' if x == '> 2 Years' else 'between_1_2_year' if x == '1-2 Year' else 'below_1_year' )
         
         return df2
+
 
     def data_preparation(self, df3):
         # anual premium - StandarScaler
