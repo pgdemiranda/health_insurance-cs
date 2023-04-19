@@ -46,14 +46,15 @@ A Google Sheets file, sorting all customers by their propensity to buy the new p
 - Git and Github;
 - Render Cloud;
 - Flask;
-- Google Sheets Apps Script.
+- Javascript;
+- Google Sheets;
+- Google Apps Script.
 # 4. Solution Strategy
 
 My strategy to solve this challenge was:
 
 **Step 01. Data Description:**
-
-Here we performed the first exploration of the data. Although we will not need to split the data between test, train, and validation sets, as Kaggle has already done this for us, we will still need to perform the following tasks:
+here we performed the first exploration of the data. Although we will not need to split the data between test, train, and validation sets, as Kaggle has already done this for us, we will still need to perform the following tasks:
 - Examine the dataset variables;
 - Rename the columns to lower case;
 - Check the data types;
@@ -61,56 +62,49 @@ Here we performed the first exploration of the data. Although we will not need t
 - Explore descriptive statistics.
 
 **Step 02. Feature Engineering:**
-
-This step involves not only exploring the relationships between features, but also creating new features that may better serve the training of our ML models. We will perform the following tasks:
+this step involves not only exploring the relationships between features, but also creating new features that may better serve the training of our ML models. We will perform the following tasks:
 - Create a mindmap to question the relationships between the features;
 - Develop new features.
 
 **Step 03. Data Filtering:**
-
-No data filtering was necessary for this project.
+no data filtering was necessary for this project.
 
 **Step 04. Exploratory Data Analysis:**
-
-In this step, we will perform univariate, bivariate, and multivariate analyses of the dataset features to generate business insights and validate previously raised hypotheses. The insights generated here will help us select which features may be relevant for the ML models. We will perform the following tasks:
+in this step, we will perform univariate, bivariate, and multivariate analyses of the dataset features to generate business insights and validate previously raised hypotheses. The insights generated here will help us select which features may be relevant for the ML models. We will perform the following tasks:
 - Perform univariate analysis of each feature;
 - Perform bivariate analysis to validate hypotheses;
 - Perform multivariate analysis with the help of a heatmap;
 - Evaluate hypothesis validations.
 
 **Step 05. Data Preparation:**
-
-Here, the scikit-learn library was used for data preprocessing.
+here, the scikit-learn library was used for data preprocessing.
 - Standardize the 'annual_premium' feature using the StandardScaler() method;
 - Rescale the 'age' and 'vintage' features using MinMaxScaler() since there are no outliers;
 - Encode the features using the following methods: one-hot encoding for 'vehicle_age', target encoding for 'gender' and 'region_code', and frequency encoding for 'policy_sales_channel'.
 
 **Step 06. Feature Selection:**
-
-We will use the Boruta algorithm to select features. We will perform the following tasks:
+we will use the Boruta algorithm to select features. We will perform the following tasks:
 - Use the ExtraTreesClassifier model with the Boruta algorithm to select features;
 - Consider feature importance using the 'feature_importances_' attribute from ExtraTreesClassifier. Then, plot a graph to display the best ranking features to facilitate feature selection.
 
 **Step 07. Machine Learning Modelling:**
-
-Three classification models (KNeighborsClassifier, LogisticRegression, and RandomForestClassifier) were trained, generating probability predictions, calculating propensity scores, and sorting customers by score. Then, precision and recall values were calculated for the top 50 customers for each model.
+three classification models (KNeighborsClassifier, LogisticRegression, and RandomForestClassifier) were trained, generating probability predictions, calculating propensity scores, and sorting customers by score. Then, precision and recall values were calculated for the top 50 customers for each model.
 - Using the 'cgc_lc' function, cumulative gain and lift curves were plotted for a set of provided models, allowing for a visual comparison of results;
 - The 'cross_validation' function was used to perform cross-validation for the provided models and return the means and standard deviations of precision and recall for each model;
 - The 'precision_at_k' and 'recall_at_k' functions were used to calculate precision and recall for the top k customers classified by the model.
 
 **Step 08. Hyperparameter Fine Tunning:**
-
-We performed a randomized search with cross-validation to optimize the hyperparameters of a logistic regression model and maximize the f1-score. Then, we will train the model on a dataset and evaluate it on a validation set.
+we performed a randomized search with cross-validation to optimize the hyperparameters of a logistic regression model and maximize the f1-score. Then, we will train the model on a dataset and evaluate it on a validation set.
 - The tuned model was then applied to a test set to predict outcomes;
 - Precision and recall were calculated at the top 50 clients for the model;
 - The performance of the tuned model was compared to the performance of the original logistic regression model using cross-validation;
 - Two models were plotted on the accumulative gain and lift curves to compare their performance.
 
 **Step 09. Convert Model Performance to Business Values:**
-We answered the 4 questions proposed in the challenge according to the final model. The details of the answers are further down, in the Business Results section.
+we answered the 4 questions proposed in the challenge according to the final model. The details of the answers are further down, in the Business Results section.
 
 **Step 10. Deploy Model to Production:**
-The deployment was done on Render cloud. We prepared a Python script that started and executed the entire pipeline, which along with the entire repository, was uploaded to GitHub. Render made contact between the online repository and a Google Sheets spreadsheet with the score for each of the customers. In turn, in Google Sheets, a script was created that automated the reception of information and the score provided by the model.
+the deployment was done on Render cloud. We prepared a Python script that started and executed the entire pipeline, which along with the entire repository, was uploaded to GitHub. Render made contact between the online repository and a Google Sheets spreadsheet with the score for each of the customers. In turn, in Google Sheets, a script was created that automated the reception of information and the score provided by the model.
 - The repository was committed to GitHub;
 - A Python script within the repository on GitHub is triggered by Render Cloud;
 - A script within Google Sheets receives information from Render Cloud and automates the customer scores.
@@ -164,14 +158,21 @@ These are our initial questions together with the answers from our model:
 2. What percentage of customers interested in purchasing vehicle insurance can the sales team reach by making 20,000 phone calls?
 - With 20.000 calls sales team will be contact **58% of customers interested**.
 
-3. If the sales team's limit of phone calls is increased to 40,000, what percentage of customers interested in purchasing vehicle insurance will be contacted by the sales team?
+3. If the sales team's limit of phone calls is increased to 40.000, what percentage of customers interested in purchasing vehicle insurance will be contacted by the sales team?
 - With 40.000 calls sales team will be contact **99% of customers interested**.
 
 4. How many phone calls does it take for the sales team to contact 80% of the customers interested in purchasing vehicle insurance?
 - With 28.400 calls sales team will be contact **80% of customers interested**.
 
+Using our model, SafeHarbor Insurance is able to reach 58% of customers within the 20,000 proposed calls in their campaign.
+
+With a model that potentially reaches 58% of our customer base, with an annual premium of 2630, a sales projection of 73,681 customers is possible, delivering a minimum sale of **₹193,782,239.80** with a conversion of **US$2,357,018.06** on 04/18/2023 (according to the currency converter of the Central Bank of Brazil https://www.bcb.gov.br/).
+
 # 9. Conclusions
+This was the first time we worked with a classification problem and we were able to acquire new skills that provided the opportunity to test new ways of exploring the data. Learning how to bring the response of each propensity score with Javascript, working with new metrics, and performing the deployment were important steps for this project. SafeHarbor Insurance can now take new marketing actions and achieve even better results with low costs. Note that 80% of customers can be reached with just a few more calls, thus obtaining an even larger share of profits.
 
 # 10. Lessons Learned
+Basically, all the challenges with a Classification problem focused on Learning to Rank: data exploration, metrics, and machine learning models. Writing the code in Javascript for Google Sheets was definitely challenging, as well as connecting all of this with Render Cloud, which we had never done before.
 
 # 11. Next Steps to Improve
+Re-doing all model training is necessary, as it's highly likely that the chosen model is not the best fit for our problem. We also need to provide an explanation of the business with the metrics used, and re-implement the entire end-to-end solution using the pipeline function of scikit-learn.
