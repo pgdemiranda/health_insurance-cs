@@ -27,33 +27,33 @@ class HealthInsurance():
         
         return df2
 
-    def data_preparation(self, df5):
+    def data_preparation(self, df3):
         # anual premium - StandarScaler
-        df5['annual_premium'] = self.annual_premium_scaler.transform(df5[['annual_premium']].values)
+        df3['annual_premium'] = self.annual_premium_scaler.transform(df3[['annual_premium']].values)
         
         # age - MinMaxScaler
-        df5['age'] = self.age_scaler.transform(df5[['age']].values)
+        df3['age'] = self.age_scaler.transform(df3[['age']].values)
         
         # vintage - MinMaxScaler
-        df5['vintage'] = self.vintage_scaler.transform(df5[['vintage']].values)
+        df3['vintage'] = self.vintage_scaler.transform(df3[['vintage']].values)
         
         # gender - One Hot Encoding / Target Encoding
-        df5.loc[:, 'gender'] = df5['gender'].map(self.target_encode_gender_scaler)
+        df3.loc[:, 'gender'] = df3['gender'].map(self.target_encode_gender_scaler)
         
         # region_code - Target Encoding / Frequency Encoding
-        df5.loc[:, 'region_code'] = df5['region_code'].map(self.target_encode_region_code_scaler)
+        df3.loc[:, 'region_code'] = df3['region_code'].map(self.target_encode_region_code_scaler)
         
         # vehicle_age - One Hot Encoding / Frequency Encoding
-        df5 = pd.get_dummies(df5, prefix='vehicle_age', columns=['vehicle_age'])
+        df3 = pd.get_dummies(df3, prefix='vehicle_age', columns=['vehicle_age'])
         
         # policy_sales_channel - Target Encoding / Frequency Encoding
-        df5.loc[:, 'policy_sales_channel'] = df5['policy_sales_channel'].map(self.fe_policy_sales_channel_scaler)
+        df3.loc[:, 'policy_sales_channel'] = df3['policy_sales_channel'].map(self.fe_policy_sales_channel_scaler)
         
         # Feature Selection
         cols_selected = ['annual_premium', 'vintage', 'age', 'region_code', 'vehicle_damage', 'previously_insured',
                         'policy_sales_channel']
         
-        return df5[cols_selected]
+        return df3[cols_selected]
 
     def get_prediction(self, model, original_data, test_data):
         # model prediction
