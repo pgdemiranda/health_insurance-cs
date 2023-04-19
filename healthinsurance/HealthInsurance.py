@@ -14,6 +14,7 @@ class HealthInsurance():
 
     def data_cleaning(self, df1):
         # Change data type
+        df1 = df1.rename(columns = str.lower)
         df1['region_code'] = df1['region_code'].astype(str)
         df1['policy_sales_channel'] = df1['policy_sales_channel'].astype(str)
         return df1 
