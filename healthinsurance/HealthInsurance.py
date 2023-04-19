@@ -25,25 +25,31 @@ class HealthInsurance():
         # Vehicle Damage Number
         df2['vehicle_damage'] = df2['vehicle_damage'].apply(lambda x: 1 if x == 'Yes' else 0)
         # Vehicle Age
-        df2['vehicle_age'] =  df2['vehicle_age'].apply(lambda x: 'over_2_years' if x == '> 2 Years' else 'between_1_2_year' if x == '1-2 Year' else 'below_1_year')
+        df2['vehicle_age'] = df2['vehicle_age'].apply(lambda x: 'over_2_years' if x == '> 2 Years' else 'between_1_2_year' if x == '1-2 Year' else 'below_1_year')
         
         return df2
 
     def data_preparation(self, df5):
         # anual premium - StandarScaler
         df5['annual_premium'] = self.annual_premium_scaler.transform(df5[['annual_premium']].values)
+        
         # age - MinMaxScaler
         df5['age'] = self.age_scaler.transform(df5[['age']].values)
+        
         # vintage - MinMaxScaler
         df5['vintage'] = self.vintage_scaler.transform(df5[['vintage']].values)
+        
         # gender - One Hot Encoding / Target Encoding
-        df5.loc[:, 'gender'] = df5['gender'].map(self.target_encode_gender)
+        df5.loc[:, 'gender'] = df5['gender'].map(self.target_encode_gender_scaler)
+        
         # region_code - Target Encoding / Frequency Encoding
-        df5.loc[:, 'region_code'] = df5['region_code'].map(self.target_encode_region_code)
+        df5.loc[:, 'region_code'] = df5['region_code'].map(self.target_encode_region_code_scaler)
+        
         # vehicle_age - One Hot Encoding / Frequency Encoding
         df5 = pd.get_dummies(df5, prefix='vehicle_age', columns=['vehicle_age'])
+        
         # policy_sales_channel - Target Encoding / Frequency Encoding
-        df5.loc[:, 'policy_sales_channel'] = df5['policy_sales_channel'].map(self.fe_policy_sales_channel)
+        df5.loc[:, 'policy_sales_channel'] = df5['policy_sales_channel'].map(self.fe_policy_sales_channel_scaler)
         
         # Feature Selection
         cols_selected = ['annual_premium', 'vintage', 'age', 'region_code', 'vehicle_damage', 'previously_insured',
@@ -57,6 +63,5 @@ class HealthInsurance():
         
         # join prediction into original data
         original_data['score'] = pred[:, 1].tolist()
-        original_data = original_data.sort_values('score', ascending = False)
         
         return original_data.to_json(orient='records', date_format='iso')
