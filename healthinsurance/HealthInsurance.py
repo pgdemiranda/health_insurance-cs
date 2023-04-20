@@ -9,7 +9,7 @@ class HealthInsurance():
         self.vintage_scaler = pickle.load(open('src/features/vintage_scaler.pkl', 'rb'))
         self.target_encode_gender_scaler = pickle.load(open('src/features/target_encode_gender_scaler.pkl', 'rb'))
         self.target_encode_region_code_scaler = pickle.load(open('src/features/target_encode_region_code_scaler.pkl', 'rb'))
-        self.fe_policy_sales_channel_scaler = pickle.load(open(+ 'src/features/fe_policy_sales_channel_scaler.pkl', 'rb'))
+        self.fe_policy_sales_channel_scaler = pickle.load(open('src/features/fe_policy_sales_channel_scaler.pkl', 'rb'))
 
     def data_cleaning(self, df1):
         # 1.1. Rename Columns
