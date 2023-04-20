@@ -4,12 +4,12 @@ import pandas as pd
 
 class HealthInsurance():
     def __init__(self):
-        self.annual_premium_scaler = pickle.load(open('src/features/annual_premium_scaler.pkl', 'rb'))
-        self.age_scaler = pickle.load(open('src/features/age_scaler.pkl', 'rb'))
-        self.vintage_scaler = pickle.load(open('src/features/vintage_scaler.pkl', 'rb'))
-        self.target_encode_gender_scaler = pickle.load(open('src/features/target_encode_gender_scaler.pkl', 'rb'))
-        self.target_encode_region_code_scaler = pickle.load(open('src/features/target_encode_region_code_scaler.pkl', 'rb'))
-        self.fe_policy_sales_channel_scaler = pickle.load(open('src/features/fe_policy_sales_channel_scaler.pkl', 'rb'))
+        self.annual_premium_scaler = pickle.load(open('../src/features/annual_premium_scaler.pkl', 'rb'))
+        self.age_scaler = pickle.load(open('../src/features/age_scaler.pkl', 'rb'))
+        self.vintage_scaler = pickle.load(open('../src/features/vintage_scaler.pkl', 'rb'))
+        self.target_encode_gender_scaler = pickle.load(open('../src/features/target_encode_gender_scaler.pkl', 'rb'))
+        self.target_encode_region_code_scaler = pickle.load(open('../src/features/target_encode_region_code_scaler.pkl', 'rb'))
+        self.fe_policy_sales_channel_scaler = pickle.load(open('../src/features/fe_policy_sales_channel_scaler.pkl', 'rb'))
 
     def data_cleaning(self, df1):
         
@@ -65,6 +65,6 @@ class HealthInsurance():
         pred = model.predict_proba(test_data)
         
         # join prediction into original data
-        original_data['score'] = pred[:, 1].tolist()
+        original_data['prediction'] = pred
         
-        return original_data.to_json(orient='records', date_format=None)
+        return original_data.to_json(orient='records', date_format='iso')
