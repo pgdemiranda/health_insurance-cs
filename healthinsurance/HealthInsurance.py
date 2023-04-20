@@ -56,17 +56,23 @@ class HealthInsurance():
         df3.loc[:, 'policy_sales_channel'] = df3['policy_sales_channel'].map(self.fe_policy_sales_channel_scaler)
         
         # Feature Selection
-        cols_selected = ['annual_premium', 'vintage', 'age', 'region_code', 'vehicle_damage', 'previously_insured',
-                        'policy_sales_channel']
+        cols_selected = [
+                'vintage',
+                'annual_premium',
+                'age',
+                'region_code',
+                'vehicle_damage',
+                'policy_sales_channel',
+                'previously_insured']
         
         return df3[cols_selected]
 
-    def get_prediction(self, model, original_data, test_data):
+    def get_predict(self, model, original_data, test_data):
+        
         # model prediction
         pred = model.predict_proba(test_data)
         
-        # Prediction as a column in the original data
-        original_data['score'] = pred[:, 1].tolist()
-        original_data = original_data.sort_values('score', ascending=False)
-
-        return original_data.to_json(orient= 'records', date_format = 'iso')
+        # join prediction into original data
+        original_data['prediction'] = pred[:,1].tolist()
+        
+        return original_data.to_json(orient='records', date_format='iso')
