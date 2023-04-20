@@ -65,7 +65,8 @@ class HealthInsurance():
         # model prediction
         pred = model.predict_proba(test_data)
         
-        # join prediction into original data
-        original_data['prediction'] = pred
-        
-        return original_data.to_json(orient='records', date_format='iso')
+        # Prediction as a column in the original data
+        original_data['score'] = pred[:, 1].tolist()
+        original_data = original_data.sort_values('score', ascending=False)
+
+        return original_data.to_json(orient= 'records', date_format = 'iso')
