@@ -13,15 +13,14 @@ class HealthInsurance():
         self.fe_policy_sales_channel_scaler = pickle.load(open(self.home_path + 'src/features/fe_policy_sales_channel_scaler.pkl', 'rb'))
 
     def data_cleaning(self, df1):
-        # 1.0. Data Cleaning
+        # 1.1. Rename Columns
+        cols_new = ['id', 'gender', 'age', 'driving_license', 'region_code', 'previously_insured', 'vehicle_age', 
+                    'vehicle_damage', 'annual_premium', 'policy_sales_channel', 'vintage', 'response']
+
+        # rename 
+        df1.columns = cols_new
         
-        # region_code
-        df1['region_code'] = df1['region_code'].astype('int64')
-
-        # policy_sales_channel 
-        df1['policy_sales_channel'] = df1['policy_sales_channel'].astype('int64')
-
-        return
+        return df1 
 
 
     def feature_engineering(self, df2):
@@ -71,4 +70,4 @@ class HealthInsurance():
         # join prediction into original data
         original_data['score'] = pred[:, 1].tolist()
         
-        return original_data.to_json(orient='records', date_format='iso')
+        return original_data.to_json(orient='records', date_format=None)
